@@ -1,0 +1,34 @@
+{% extends "./base.html" %}
+
+{% block title %} Carreras {% endblock %}
+
+{% block body %}
+
+<div class="row">
+    <div class="clo-md-4 offset-md-4">
+        <h2>Edicion de Carreras</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="{% url 'editarCarrera' %}" method="POST">{% csrf_token %}
+                <div class="form-group">
+                    <input type="text" name="txtCodigo"value="{{carrera.codigo}}" class="form-control" placeholder="Código" readonly required>
+                </div>    
+                <div class="form-group">
+                    <input type="text" name="txtNombre" value="{{carrera.nombre}}"class="form-control" placeholder="Nombre Carrera" required>
+                </div> 
+                <div class="form-group">
+                <input type="number" name="numDuracion" value="{{carrera.duracion}}" class="form-control" placeholder="Duración" required>
+                </div> 
+               
+                <div class="form-group">
+                  <button type="submit" class="btn btn-success btn-block text-white" > Guardar</button>
+                </div>
+                </form>
+                
+            </div>
+    
+        </div>
+        </div>
+
+    </div>
+    {% endblock %}

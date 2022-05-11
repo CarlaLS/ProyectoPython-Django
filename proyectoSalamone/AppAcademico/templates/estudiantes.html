@@ -1,0 +1,88 @@
+{% extends "./base.html" %}
+
+{% block title %} Estudiantes {% endblock %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+    <h2> Registrar Estudiantes</h2>
+    <div class="card">
+        <div class="card-body">
+            <form action="{% url 'registrarEstudiante' %}" method="POST">{% csrf_token %}
+            
+            <div class="form-group">
+                <input type="text" name="txtApePaterno" class="form-control" placeholder="Apellido Paterno" required>
+            </div> 
+            <div class="form-group">
+                <input type="text" name="txtApeMaterno" class="form-control" placeholder="Apellido Materno" required>
+            </div>    
+            <div class="form-group">
+                <input type="text" name="txtNombres" class="form-control" placeholder="Nombres" required>
+            </div> 
+            <div class="form-group">
+            <input type="text" name="txtFecha" class="form-control" placeholder="Fecha Nacimiento" required>
+            </div> 
+            
+            <div class="form-group">
+              <button type="submit" class="btn btn-success btn-block text-white" > Guardar</button>
+            </div>
+            </form>
+            
+        </div>
+
+    </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+        <h1>Listado de Estudiantes </h1>
+     <div class="table-responsive py-2">
+         <table class="table table-striped">
+             <thead>
+                 <tr>
+                     <th>ID</th>
+                     <th>Apellido Paterno</th>
+                     <th>Apellido Materno</th>
+                     <th>Nombres</th>
+                     <th>Fecha Nacimiento </th>
+                     <th colspan="2">Opciones</th>
+                     
+                 </tr>
+             </thead>
+             <tbody>
+                 {% for e in estudiantes %}
+                 <tr>
+                     <td>{{e.id}}</td>
+                     <td>{{e.apellidoPaterno}}</td>
+                     <td>{{e.apellidoMaterno}}</td>
+                     <td>{{e.nombres}}</td>
+                     <td>{{e.fechaNacimiento}}</td>
+                  
+                     <td><a href="{% url 'eliminarEstudiante' e.id %}" class="btn btn-danger">Eliminar</a></td>
+                 </tr>
+                 {% endfor %}
+             </tbody>
+         </table>
+
+     </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        <h2>Buscar Estudiantes</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="{% url 'buscar' %}" method="GET">
+                <div class="form-group">
+                    <input type="text" name="txtApePaterno" class="form-control" placeholder="Apellido Paterno" required>
+                </div>    
+               
+                <div class="form-group">
+                  <button type="submit" class="btn btn-success btn-block text-white" > Buscar</button>
+                </div>
+                </form>
+                
+            </div>
+    
+        </div>
+        </div>
+        
+</div>
+{% endblock %}
